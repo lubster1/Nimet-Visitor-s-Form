@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIMET Visitor's Registration</title>
+    <link rel="icon" type="image/png" href="images/NIMET.jpg">
+
+   <style>
+    body {
+        background-image: url('images/nimet_building.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+    }
+
+    /* --- SHIFTING SKY GRADIENT --- */
+    #sky-gradient {
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        /* A gradient mixing deep sky blue, subtle sunrise orange, and NiMet green */
+        background: linear-gradient(
+            45deg, 
+            rgba(13, 82, 171, 0.3), 
+            rgba(255, 165, 0, 0.2), 
+            rgba(46, 139, 87, 0.3), 
+            rgba(13, 82, 171, 0.3)
+        );
+        
+        /* Stretches the gradient so you only see smooth, massive blends of color */
+        background-size: 400% 400%; 
+        
+        z-index: 0; /* Keeps it behind the form but in front of the building */
+        pointer-events: none; /* Ensures it doesn't block mouse clicks */
+        
+        /* Triggers the smooth panning animation */
+        animation: shiftSky 20s ease infinite; 
+    }
+
+    /* Moves the background position to shift the colors over time */
+    @keyframes shiftSky {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    #header-container, #form-container {
+        background-color: rgba(255, 255, 255, 0.40); 
+        backdrop-filter: blur(12px); 
+        -webkit-backdrop-filter: blur(12px); 
+        border: 1px solid rgba(255, 255, 255, 0.6); 
+        padding: 30px;
+        margin: 30px auto; 
+        max-width: 500px; 
+        border-radius: 12px; 
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
+        position: relative; 
+        z-index: 10;
+    }
+
+ 
+    /* 2. Move information to the center */
+    #header-container, h2, p {
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    fieldset {
+        width: 90%; 
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    input[type="text"], input[type="tel"], input[type="email"], select, input[type="date"], input[type="time"], textarea {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 5px;
+        padding: 5px;
+    }
+
+    .button {
+        background-color: rgb(214, 219, 219);
+        font-weight: bold;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+    .button:hover{
+        background-color: aquamarine;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <div id="sky-gradient"></div>
+
+    <div id="header-container">
+        <img src="images/logo.png" alt="Official NIMET Logo" width="150">
+        <h1>Nigerian Meteorological Agency Visitor's Registration Form</h1>
+        
+        <nav>
+            <a href="https://nimet.gov.ng/" target="_blank">Nimet's Home Page</a> | 
+            <a href="mailto:info@nimet.gov.ng">Contact Support</a>
+        </nav>
+    </div>
+
+    <hr>
+
+    <!-- Main Form Container -->
+    <div id="form-container">
+        <h2>Visitor Information Form</h2>
+        <p>Please complete all required fields below before approaching the reception desk.</p>
+
+        <form action="success.html" method="GET">
+            
+            <!-- Grouping Personal Details -->
+            <fieldset>
+                <legend>Personal Details</legend>
+                
+                <div>
+                    <label for="fullName">Full Name:</label><br>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <br>
+
+                <div>
+                    <label for="organization">Organisation or Company:</label><br>
+                    <input type="text" id="organization" name="organization" required>
+                </div>
+                <br>
+
+                <div>
+                    <label for="phone">Phone Number:</label><br>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <br>
+
+                <div>
+                    <label for="email">Email Address:</label><br>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </fieldset>
+            <br>
+
+            <!-- Grouping Visit Details -->
+            <fieldset>
+                <legend>Visit Details</legend>
+
+                <div>
+                    <label for="officeVisited">Person or Office Being Visited:</label><br>
+                    <select id="officeVisited" name="officeVisited" required>
+                        <option value="">-- Select an Office --</option>
+                        <option value="director">Office of the Director General</option>
+                        <option value="CFO">Central Forecast Office(CFO)</option>
+                        <option value="DMU">Data Management Unit</option>
+                        <option value="finance">Financial Record Department</option>
+                        <option value="hr">Human Resources</option>
+                        <option value="Training">Training Unit</option>
+                        <option value="legal">Legal Department</option>
+                        <option value="ICT">ICT Department</option>
+                    </select>
+                </div>
+                <br>
+
+                <div>
+                    <label>Purpose of Visit:</label><br>
+                    <input type="radio" id="purposeMeeting" name="purpose" value="Meeting" required>
+                    <label for="purposeMeeting">Official Meeting</label><br>
+                    
+                    <input type="radio" id="purposeDelivery" name="purpose" value="Delivery" required>
+                    <label for="purposeDelivery">Delivery/Courier</label><br>
+                    
+                    <input type="radio" id="purposeInterview" name="purpose" value="Interview" required>
+                    <label for="purposeInterview">Interview</label><br>
+                    <input type="radio" id="purposeDeployment" name="purpose" value="Deployment" required>
+                    <label for="purposeMeeting">Corp Member Deployment</label><br>
+                    <input type="radio" id="purposeSchool" name="purpose" value="School" required>
+                    <label for="purposeMeeting">IT Student Deployment</label>
+                </div>
+                <br>
+
+                <div>
+                    <label for="visitDate">Date of Visit:</label><br>
+                    <input type="date" id="visitDate" name="visitDate" required>
+                </div>
+                <br>
+
+                <div>
+                    <label for="arrivalTime">Time of Arrival:</label><br>
+                    <input type="time" id="arrivalTime" name="arrivalTime" required>
+                </div>
+            </fieldset>
+            <br>
+
+            <!-- Grouping Security & Verification -->
+            <fieldset>
+                <legend>Security & Verification</legend>
+
+                <div>
+                    <label>Means of Identification Provided:</label><br>
+                    <input type="checkbox" id="idPassport" name="identification" value="Passport">
+                    <label for="idPassport">International Passport</label><br>
+                    
+                    <input type="checkbox" id="idDriverLicense" name="identification" value="DriverLicense">
+                    <label for="idDriverLicense">Driver's License</label><br>
+                    
+                    <input type="checkbox" id="idNational" name="identification" value="NationalID">
+                    <label for="idNational">National ID</label><br>
+                    <input type="checkbox" id="idNYSCcard" name="identification" value="NYSCcard">
+                    <label for="idNYSCcard">NYSC Card</label><br>
+                    <input type="checkbox" id="idSchoolID" name="identification" value="SchoolID">
+                    <label for="idSchoolID">School ID</label>
+                </div>
+                <br>
+
+                <div>
+                    <label for="remarks">Additional Information or Remarks:</label><br>
+                    <textarea id="remarks" name="remarks" rows="4" cols="50" placeholder="Enter any special requests or notes here..."></textarea>
+                </div>
+            </fieldset>
+            <br>
+
+            <!-- Submit Button -->
+            <div>
+                <button class="button" type="submit">Submit Visitor's Log</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
